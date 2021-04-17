@@ -5,6 +5,8 @@ vue-ui/dist
 vue-d2-admin/dist
 service-modules/*consumer/target
 service-modules/*provider/target
+service-modules/target
+/target
 api-gateway/target
 gabriel-core/target
 /common
