@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ManagerServiceConsumer
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:81
+        register-enabled: true
+        heart-beat-interval: 15
+        heart-beat-timeout: 60
+        ip: 127.0.0.1
+      config:
+        server-addr: localhost:81
+        config-retry-time: 5
+        file-extension: yaml
+        shared-configs:
+          - redis.yaml
+          - seata.yaml

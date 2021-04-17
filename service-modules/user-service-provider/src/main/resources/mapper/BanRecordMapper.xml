@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kyu.gabriel.user.dao.BanDao">
+    <resultMap id="banRecord" type="com.kyu.gabriel.core.model.po.user.BanRecord">
+        <result property="id" column="id" />
+        <result property="uuid" column="uuid" />
+        <result property="startDate" column="start_date" />
+        <result property="endDate" column="end_date" />
+        <result property="reason" column="reason" />
+        <result property="operator" column="operator" />
+        <result property="deleteFlag" column="delete_flag" />
+        <result property="deleteDate" column="delete_date" />
+    </resultMap>
+
+    <select id="listBanRecord" resultType="com.kyu.gabriel.core.model.dto.ListBanDTO">
+        select
+               b.id,
+               b.uuid,
+               u2.username banned_username,
+               b.start_date,
+               b.end_date,
+               b.reason,
+               b.operator,
+               u.username operator_username,
+               b.delete_flag,
+               b.delete_date
+        from banned_list b
+            left join user_data u
+                on b.operator = u.uuid
+            left join user_data u2
+                on b.uuid = u2.uuid
+        ${ew.customSqlSegment}
+    </select>
+
+    <update id="updateBatch" parameterType="java.util.List">
+        insert into banned_list(id, uuid, start_date, end_date, reason, operator, delete_flag, delete_date)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.uuid}, #{item.startDate}, #{item.endDate},
+             #{item.reason}, #{item.operator}, #{item.deleteFlag}, #{item.deleteDate})
+        </foreach>
+        on duplicate key update
+        id = values(id), delete_flag = values(delete_flag), delete_date = values(delete_date)
+    </update>
+</mapper>

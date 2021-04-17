@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: ManagerServiceProvider
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:81
+        heart-beat-interval: 15
+        heart-beat-timeout: 60
+        ip: 127.0.0.1
+      config:
+        file-extension: yaml
+        config-retry-time: 5
+        shared-configs:
+          - datasource-manager.yaml
+          - mybatis-plus.yaml
+          - redis.yaml
+          - seata.yaml
+    sentinel:
+      transport:
+        dashboard: localhost:8080

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: UserServiceConsumer
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        register-enabled: true
+        heart-beat-interval: 15
+        heart-beat-timeout: 60
+        ip: 127.0.0.1
+      config:
+        file-extension: yaml
+        server-addr: localhost:8848
+        config-retry-time: 5
+        shared-configs:
+          - seata.yaml
+          - redis.yaml

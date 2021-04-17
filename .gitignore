@@ -1,0 +1,34 @@
+.DS_Store
+vue-ui/node_modules
+vue-d2-admin/node_modules
+vue-ui/dist
+vue-d2-admin/dist
+service-modules/*consumer/target
+service-modules/*provider/target
+api-gateway/target
+gabriel-core/target
+/common
+/.tmp
+/config
+/vue-ui/dist
+/vue-d2-admin/dist
+/docker
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

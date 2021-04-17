@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kyu.gabriel.manager.dao.ConfigDao">
+
+    <update id="updateBatch" parameterType="java.util.List">
+        insert into sys_config(id, config_key, config_value, update_by, update_date, disable, writeable)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.configKey}, #{item.configValue},#{item.updateBy},
+             #{item.updateDate},#{item.disable}, #{item.writeable})
+        </foreach>
+        on duplicate key update
+        id = values(id), config_value = values(config_value), update_date = values(update_date), update_by = values(update_by)
+    </update>
+</mapper>

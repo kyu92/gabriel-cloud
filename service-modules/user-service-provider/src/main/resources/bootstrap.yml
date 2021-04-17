@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: UserServiceProvider
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        heart-beat-interval: 15
+        heart-beat-timeout: 60
+        ip: 127.0.0.1
+      config:
+        file-extension: yaml
+        server-addr: localhost:8848
+        config-retry-time: 5
+        shared-configs:
+          - redis.yaml
+          - datasource-user.yaml
+          - mybatis-plus.yaml
+          - seata.yaml
+    sentinel:
+      transport:
+        dashboard: localhost:8080

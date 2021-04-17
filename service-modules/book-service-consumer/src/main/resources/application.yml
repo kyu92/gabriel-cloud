@@ -1,0 +1,8 @@
+server:
+  port: 8011
+
+#provider:
+#  # 负载均衡规则
+#  ribbon:
+#    #随机规则
+#    NFLoadBalanacerRuleClassName: com.netflix.loadbalancer.RandomRule

@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: BookServiceConsumer
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: true
+        server-addr: localhost:81
+        heart-beat-interval: 15
+        heart-beat-timeout: 60
+        ip: 127.0.0.1
+      config:
+        server-addr: localhost:81
+        file-extension: yaml
+        config-retry-time: 5
+        shared-configs:
+          - seata.yaml
+          - redis.yaml

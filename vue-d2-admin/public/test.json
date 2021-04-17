@@ -1,0 +1,55 @@
+{
+  "statusCode":0,
+  "successful":true,
+  "message":null,
+  "data": {
+    "BookServiceConsumer":[
+      {"host":"127.0.0.1","port":8011,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8012,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8013,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.62","port":8011,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.62","port":8012,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.63","port":8011,"instanceId":null,"scheme":null,"secure":false}
+    ],
+    "BookServiceProvider":[
+      {"host":"127.0.0.1","port":8001,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8002,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.61","port":8001,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.61","port":8002,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.62","port":8001,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.63","port":8001,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.63","port":8002,"instanceId":null,"scheme":null,"secure":false}
+    ],
+    "ManagerServiceConsumer":[
+      {"host":"127.0.0.1","port":8051,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8052,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8053,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8054,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.62","port":8051,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.59","port":8051,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.59","port":8052,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.56","port":8051,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.56","port":8052,"instanceId":null,"scheme":null,"secure":false}
+    ],
+    "UserServiceConsumer":[
+      {"host":"127.0.0.1","port":8031,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8032,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8033,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8034,"instanceId":null,"scheme":null,"secure":false}
+    ],
+    "UserServiceProvider":[
+      {"host":"127.0.0.1","port":8021,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8022,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8023,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8024,"instanceId":null,"scheme":null,"secure":false}
+    ],
+    "ManagerServiceProvider": [
+      {"host":"127.0.0.1","port":8041,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"127.0.0.1","port":8042,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.51","port":8041,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.51","port":8042,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.53","port":8041,"instanceId":null,"scheme":null,"secure":false},
+      {"host":"192.168.31.53","port":8042,"instanceId":null,"scheme":null,"secure":false}
+    ]
+  }
+}
