@@ -1,6 +1,8 @@
 package com.kyu.gabriel.manager.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.kyu.gabriel.core.cache.Cache;
+import com.kyu.gabriel.core.cache.Empty;
 import com.kyu.gabriel.core.model.dto.PageDTO;
 import com.kyu.gabriel.core.model.po.manager.Log;
 import com.kyu.gabriel.core.result.ResultMap;
@@ -23,6 +25,7 @@ public class LogController {
     }
 
     @PutMapping("/log")
+    @Empty("log")
     public ResultMap<Void> addLog(@RequestBody Log log){
         if (logService.addLog(log)){
             return ResultMap.success();
@@ -31,6 +34,7 @@ public class LogController {
     }
 
     @DeleteMapping("/log/{id}")
+    @Empty("log")
     public ResultMap<Void> deleteLog(@PathVariable int id){
         if (logService.deleteLog(id)){
             return ResultMap.success();
@@ -39,6 +43,7 @@ public class LogController {
     }
 
     @PostMapping("/log/list")
+    @Cache(value = "log", time = 5)
     public ResultMap<Map<String, Object>> listSystemLog(@RequestBody PageDTO dto){
         Map<String, Object> result = new HashMap<>();
         IPage<Log> logs = logService.listLog(dto);
@@ -48,6 +53,7 @@ public class LogController {
     }
 
     @DeleteMapping("/log/clear")
+    @Empty("log")
     public ResultMap<Integer> clearLog(){
         int count = logService.clearLog();
         if (count > 0){
@@ -57,6 +63,7 @@ public class LogController {
     }
 
     @DeleteMapping("/log")
+    @Empty("log")
     public ResultMap<Integer> batchDeleteLog(@RequestBody List<Integer> ids){
         System.out.println();
         int count = logService.batchDeleteLog(ids);

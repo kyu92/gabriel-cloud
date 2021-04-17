@@ -1,6 +1,8 @@
 package com.kyu.gabriel.manager.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.kyu.gabriel.core.cache.Cache;
+import com.kyu.gabriel.core.cache.Empty;
 import com.kyu.gabriel.core.model.po.manager.Feedback;
 import com.kyu.gabriel.core.model.vo.ListFeedbackVo;
 import com.kyu.gabriel.core.result.ResultMap;
@@ -25,6 +27,7 @@ public class FeedbackController {
     }
 
     @PutMapping("/")
+    @Empty("feedback")
     public ResultMap<Void> putFeedback(@RequestBody Feedback feedback){
         if (feedbackService.put(feedback)){
             return ResultMap.success();
@@ -33,6 +36,7 @@ public class FeedbackController {
     }
 
     @PostMapping("/")
+    @Cache("feedback")
     public ResultMap<Map<String, Object>> listFeedback(@RequestBody ListFeedbackVo vo){
         Map<String, Object> result = new HashMap<>();
         IPage<Feedback> feedbacks = feedbackService.list(vo.getKeyword(), vo.getPage(), vo.getLimit());
@@ -42,6 +46,7 @@ public class FeedbackController {
     }
 
     @PostMapping("/status")
+    @Empty("feedback")
     public ResultMap<Integer> setFeedbackStatus(@RequestBody List<Integer> ids, @RequestParam int status){
         int count = feedbackService.setStatus(ids, status);
         if (count > 0){
@@ -51,6 +56,7 @@ public class FeedbackController {
     }
 
     @DeleteMapping("/")
+    @Empty("feedback")
     public ResultMap<Integer> deleteFeedback(@RequestBody List<Integer> ids){
         int count = feedbackService.delete(ids);
         if (count > 0){

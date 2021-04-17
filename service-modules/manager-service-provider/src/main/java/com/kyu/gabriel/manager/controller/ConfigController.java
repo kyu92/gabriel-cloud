@@ -22,7 +22,7 @@ public class ConfigController {
     }
 
     @GetMapping("/")
-    @Cache(value = "config", time = -1)
+    @Cache(value = "config", time = 3600)
     public ResultMap<List<Config>> getConfig(){
         return ResultMap.success(configService.listConfig());
     }
@@ -37,13 +37,13 @@ public class ConfigController {
     }
 
     @GetMapping("/key/{configKey}")
-    @Cache(value = "config:option", time = -1)
+    @Cache(value = "config:option", time = 3600)
     public ResultMap<Config> getConfigByKey(@PathVariable String configKey){
         return ResultMap.success(configService.getConfigOption(configKey));
     }
 
     @GetMapping("/id/{configId}")
-    @Cache(value = "config:option", time = -1)
+    @Cache(value = "config:option", time = 3600)
     public ResultMap<Config> getConfigById(@PathVariable int configId){
         return ResultMap.success(configService.getConfigOption(configId));
     }
