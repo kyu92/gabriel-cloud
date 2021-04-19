@@ -20,6 +20,7 @@
             <directory>target</directory>
             <includes>
                 <include>Dockerfile</include>
+                <include>*.jar</include>
             </includes>
             <fileMode>0644</fileMode>
             <outputDirectory>/</outputDirectory>
@@ -31,7 +32,6 @@
                 <include>*.cmd</include>
             </includes>
             <fileMode>0755</fileMode>
-            <outputDirectory>bin</outputDirectory>
         </fileSet>
         <fileSet>
             <directory>./</directory>
@@ -44,9 +44,4 @@
             <fileMode>0644</fileMode>
         </fileSet>
     </fileSets>
-    <dependencySets>
-        <dependencySet>
-            <outputDirectory>lib</outputDirectory>
-        </dependencySet>
-    </dependencySets>
 </assembly>
