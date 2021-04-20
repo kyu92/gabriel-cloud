@@ -14,6 +14,7 @@ import com.kyu.gabriel.core.model.dto.BanDTO;
 import com.kyu.gabriel.core.model.dto.ListBanDTO;
 import com.kyu.gabriel.core.model.po.user.BanRecord;
 import com.kyu.gabriel.core.model.vo.ListBanRecordVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,6 +27,7 @@ import java.util.Map;
 
 @RestController
 @RefreshScope
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -144,6 +146,7 @@ public class UserController {
     @Empty("ban:list")
     public ResultMap<Void> changeUserBanStatus(@RequestBody BanDTO banDTO){
         User user = userService.getUserByUUID(banDTO.getUuid());
+        log.info("封禁用户: " + banDTO.getUuid() + ", 理由: " + banDTO.getReason());
         if (user.getPermission() == 0){
             return ResultMap.failed(1005, "你不能封禁管理员用户");
         }

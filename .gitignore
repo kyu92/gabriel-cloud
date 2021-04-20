@@ -15,6 +15,11 @@ gabriel-core/target
 /vue-ui/dist
 /vue-d2-admin/dist
 /docker
+/logs
+*.iml
+*.ids
+*.ipr
+*.iws
 
 # local env files
 .env.local

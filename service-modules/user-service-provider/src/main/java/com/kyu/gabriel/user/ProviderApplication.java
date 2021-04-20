@@ -1,5 +1,6 @@
 package com.kyu.gabriel.user;
 
+import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(value = {"com.kyu.gabriel.core", "com.kyu.gabriel.user"})
 @EnableTransactionManagement
 @EnableDiscoveryClient
+@EnableAutoDataSourceProxy
 public class ProviderApplication {
 
     public static void main(String[] args){

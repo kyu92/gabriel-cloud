@@ -17,7 +17,6 @@ import com.kyu.gabriel.core.security.Encryptor;
 import com.kyu.gabriel.core.string.StringGenerator;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 

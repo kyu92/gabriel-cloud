@@ -22,7 +22,7 @@ public interface ManagerService {
     ResultMap<Void> addLog(@RequestBody Log log);
 
     @DeleteMapping("/log/{id}")
-    ResultMap<Void> deleteLog(@PathVariable int id);
+    ResultMap<Void> deleteLog(@PathVariable("id") int id);
 
     @PostMapping("/log/list")
     ResultMap<Map<String, Object>> listSystemLog(@RequestBody PageDTO dto);
@@ -40,16 +40,16 @@ public interface ManagerService {
     ResultMap<Void> updateConfig(@RequestBody List<Config> configList);
 
     @GetMapping("/config/key/{configKey}")
-    ResultMap<Config> getConfigByKey(@PathVariable String configKey);
+    ResultMap<Config> getConfigByKey(@PathVariable("configKey") String configKey);
 
     @GetMapping("/config/id/{configId}")
-    ResultMap<Config> getConfigById(@PathVariable int configId);
+    ResultMap<Config> getConfigById(@PathVariable("configId") int configId);
 
     @PutMapping("/qa/")
     ResultMap<Void> addQA(@RequestBody Answer answer);
 
     @DeleteMapping("/qa/{id}")
-    ResultMap<Void> deleteQA(@PathVariable int id);
+    ResultMap<Void> deleteQA(@PathVariable("id") int id);
 
     @PostMapping("/qa/")
     ResultMap<Void> updateQA(@RequestBody Answer answer);
@@ -58,7 +58,7 @@ public interface ManagerService {
     ResultMap<List<Answer>> listQA();
 
     @GetMapping("/qa/{id}")
-    ResultMap<Answer> getQA(@PathVariable int id);
+    ResultMap<Answer> getQA(@PathVariable("id") int id);
 
     @PutMapping("/feedback/")
     ResultMap<Void> putFeedback(@RequestBody Feedback feedback);
@@ -67,7 +67,7 @@ public interface ManagerService {
     ResultMap<Map<String, Object>> listFeedback(@RequestBody ListFeedbackVo vo);
 
     @PostMapping("/feedback/status")
-    ResultMap<Integer> setFeedbackStatus(@RequestBody List<Integer> ids, @RequestParam int status);
+    ResultMap<Integer> setFeedbackStatus(@RequestBody List<Integer> ids, @RequestParam("status") int status);
 
     @DeleteMapping("/feedback/")
     ResultMap<Integer> deleteFeedback(@RequestBody List<Integer> ids);

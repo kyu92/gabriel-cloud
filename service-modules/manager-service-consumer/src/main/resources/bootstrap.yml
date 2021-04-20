@@ -1,3 +1,6 @@
+#server:
+#  port: 8051
+
 spring:
   application:
     name: ManagerServiceConsumer
@@ -10,11 +13,13 @@ spring:
         register-enabled: true
         heart-beat-interval: 15
         heart-beat-timeout: 60
-        ip: 127.0.0.1
       config:
-        server-addr: localhost:81
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
         config-retry-time: 5
         file-extension: yaml
         shared-configs:
           - redis.yaml
           - seata.yaml
+          - logging.yaml
+          - sentinel.yaml
+          - actuator.yaml

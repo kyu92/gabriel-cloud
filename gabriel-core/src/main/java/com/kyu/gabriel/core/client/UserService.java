@@ -18,19 +18,19 @@ import java.util.Map;
 public interface UserService {
 
     @PostMapping("/query/username/{username}")
-    ResultMap<User> queryUsernameExist(@PathVariable String username);
+    ResultMap<User> queryUsernameExist(@PathVariable("username") String username);
 
     @PostMapping("/query/email/{email}")
-    ResultMap<User> queryEmailExist(@PathVariable String email);
+    ResultMap<User> queryEmailExist(@PathVariable("email") String email);
 
     @PostMapping("/query/mobile/{mobile}")
-    ResultMap<User> queryMobileExist(@PathVariable String mobile);
+    ResultMap<User> queryMobileExist(@PathVariable("mobile") String mobile);
 
     @PostMapping("/query/uuid/{uuid}")
-    ResultMap<User> queryUUIDExist(@PathVariable String uuid);
+    ResultMap<User> queryUUIDExist(@PathVariable("uuid") String uuid);
 
     @PostMapping("/query/column/{column}")
-    ResultMap<User> queryByUniqueColumns(@PathVariable String column);
+    ResultMap<User> queryByUniqueColumns(@PathVariable("column") String column);
 
     @PutMapping("/user")
     ResultMap<Void> addUser(@RequestBody User user);
@@ -39,7 +39,7 @@ public interface UserService {
     ResultMap<Void> updateUser(@RequestBody User user);
 
     @GetMapping("/user/ban/{uuid}")
-    ResultMap<BanRecord> getUserBanInfo(@PathVariable String uuid);
+    ResultMap<BanRecord> getUserBanInfo(@PathVariable("uuid") String uuid);
 
     @PostMapping("/users")
     ResultMap<Map<String, Object>> listUsers(@RequestBody ListUserVO listUserVo);
@@ -48,7 +48,7 @@ public interface UserService {
     ResultMap<Integer> getUserCount();
 
     @PostMapping("/reset/{uuid}")
-    ResultMap<String> resetPassword(@PathVariable String uuid);
+    ResultMap<String> resetPassword(@PathVariable("uuid") String uuid);
 
     @PostMapping("/user/ban")
     ResultMap<Void> changeUserBanStatus(@RequestBody BanDTO banDTO);
@@ -60,13 +60,13 @@ public interface UserService {
     ResultMap<Map<String, Object>> listBanRecord(@RequestBody ListBanRecordVO vo);
 
     @DeleteMapping("/ban/relieve/{id}")
-    ResultMap<Void> relieveBan(@PathVariable int id, @RequestBody User operator);
+    ResultMap<Void> relieveBan(@PathVariable("id") int id, @RequestBody User operator);
 
     @DeleteMapping("/ban/relieve/batch")
-    ResultMap<Integer> relieveBanBatch(@RequestParam List<Integer> ids, @RequestBody User operator);
+    ResultMap<Integer> relieveBanBatch(@RequestParam("ids") List<Integer> ids, @RequestBody User operator);
 
     @DeleteMapping("/ban/delete/{id}")
-    ResultMap<Void> deleteBanRecord(@PathVariable int id);
+    ResultMap<Void> deleteBanRecord(@PathVariable("id") int id);
 
     @DeleteMapping("/ban/delete/batch")
     ResultMap<Integer> deleteBanRecordBatch(@RequestBody List<Integer> ids);

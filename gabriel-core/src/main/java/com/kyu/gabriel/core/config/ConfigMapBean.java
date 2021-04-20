@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
-@Configuration
+//@Configuration
 public class ConfigMapBean {
 
-    @Bean
+//    @Bean
     public ConfigMap configMap(ApplicationContext context) {
         boolean hasBean = Arrays.stream(context.getBeanDefinitionNames()).anyMatch(s -> s.contains("ManagerService"));
         if(hasBean) {

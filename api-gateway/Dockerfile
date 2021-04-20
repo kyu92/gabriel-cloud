@@ -15,12 +15,11 @@ RUN ["mkdir", "-p", "/gateway"]
 WORKDIR /gateway
 VOLUME /gateway
 
-COPY ./bin /gateway/bin
-COPY ./config /gateway/config
-COPY ./lib /gateway/lib
-COPY ./README.md /gateway/README.md
+COPY *.jar /gateway
+COPY boot* /gateway
+COPY *.yml /gateway/config
+COPY *.properties /gateway/config
 
-RUN chmod +x /gateway/bin/boot.sh
-WORKDIR /gateway/bin
+RUN chmod +x /gateway/boot.sh
 
-CMD sh /gateway/bin/boot.sh
+CMD sh /gateway/boot.sh

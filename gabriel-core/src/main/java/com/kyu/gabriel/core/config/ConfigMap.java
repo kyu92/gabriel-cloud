@@ -6,21 +6,26 @@ import com.kyu.gabriel.core.model.po.user.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+@Component
 public class ConfigMap extends HashMap<String, String> {
 
     private static final long serialVersionUID = -5774767621621360442L;
-    private final ManagerService managerService;
+    private ManagerService managerService;
+    private final boolean hasBean;
 
     public ConfigMap(ApplicationContext context){
-        managerService = context.getBean(ManagerService.class);
+        hasBean = Arrays.stream(context.getBeanDefinitionNames()).anyMatch(s -> s.contains("ManagerService"));
+        if (hasBean) {
+            managerService = context.getBean(ManagerService.class);
+        }
     }
 
     public void loadConfig(){
+        if (!hasBean){
+            return;
+        }
         List<Config> configList = managerService.getConfig().getData();
         for (Config config: configList){
             this.put(config.getConfigKey(), config.getConfigValue());
@@ -38,6 +43,9 @@ public class ConfigMap extends HashMap<String, String> {
     }
 
     public void save(User operator){
+        if (!hasBean){
+            return;
+        }
         List<Config> configList = managerService.getConfig().getData();
         List<Config> modify = new ArrayList<>();
         for (Config config: configList){

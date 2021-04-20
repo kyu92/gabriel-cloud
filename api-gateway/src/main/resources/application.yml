@@ -11,8 +11,20 @@ spring:
         server-addr: localhost:81
         heart-beat-interval: 15
         heart-beat-timeout: 60
-        ip: 127.0.0.1
     gateway:
       discovery:
         locator:
           enabled: true
+
+logging:
+  level:
+    root: info
+    com:
+      baomidou: fatal
+  pattern:
+#    console: '%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger- %msg%n'
+  file:
+    max-history: 30
+    name: logs/log.log
+    clean-history-on-start: true

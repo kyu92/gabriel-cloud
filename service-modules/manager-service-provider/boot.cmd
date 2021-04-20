@@ -1,2 +1,2 @@
-@title Gabriel - API Gateway
-@java -server -Xmx512M -jar api-gateway-0.0.1.jar
+@title Gabriel - ManagerServiceProvider
+@java -server -Xmx512M -jar manager-service-provider-0.0.1.jar

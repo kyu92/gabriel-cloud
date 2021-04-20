@@ -54,22 +54,7 @@ public class Encryptor {
             throw new IllegalArgumentException("String to encrypt cannot be null or zero length");
         }
         String str = uuid + this.separator + password;
-        StringBuilder hexString = new StringBuilder();
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(str.getBytes());
-            byte[] hash = md.digest();
-            for (byte b : hash) {
-                if ((0xff & b) < 0x10) {
-                    hexString.append("0").append(Integer.toHexString((0xFF & b)));
-                } else {
-                    hexString.append(Integer.toHexString(0xFF & b));
-                }
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return hexString.toString();
+        return to32MD5(str);
     }
 
     public static String to32MD5(String plaintext){

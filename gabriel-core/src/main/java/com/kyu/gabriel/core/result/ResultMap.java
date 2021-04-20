@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class ResultMap<E> {
+public class ResultMap<E> implements Cloneable {
 
     @NonNull
     private int statusCode;
@@ -75,5 +75,10 @@ public class ResultMap<E> {
             return res;
         }
         throw new ClassCastException("参数resultMap不是ResultMap类的实例");
+    }
+
+    @Override
+    public ResultMap<?> clone() throws CloneNotSupportedException {
+        return (ResultMap<?>) super.clone();
     }
 }

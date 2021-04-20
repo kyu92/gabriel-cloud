@@ -1,1 +1,1 @@
-java -server -Xmx512M -jar api-gateway-0.0.1.jar
+java -server -Xmx512M -jar manager-service-consumer-0.0.1.jar

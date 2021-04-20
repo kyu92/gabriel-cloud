@@ -18,31 +18,31 @@ public interface BookService {
     ResultMap<Void> addBook(@RequestBody Book book);
 
     @PostMapping("/book")
-    ResultMap<Book> getBook(@RequestParam String uuid);
+    ResultMap<Book> getBook(@RequestParam("uuid") String uuid);
 
     @GetMapping("/book/{userUid}")
-    ResultMap<List<Book>> getBooks(@PathVariable String userUid);
+    ResultMap<List<Book>> getBooks(@PathVariable("userUid") String userUid);
 
     @DeleteMapping("/book/{uid}")
-    ResultMap<Void> deleteBook(@PathVariable String uid);
+    ResultMap<Void> deleteBook(@PathVariable("uid") String uid);
 
     @GetMapping("/count")
     ResultMap<Integer> getBookCount();
 
     @GetMapping("/count/{uuid}")
-    ResultMap<Integer> getBookCount(@PathVariable String uuid);
+    ResultMap<Integer> getBookCount(@PathVariable("uuid") String uuid);
 
     @PostMapping("/books")
     ResultMap<Map<String, Object>> listBooks(@RequestBody ListBookVO listBookVo);
 
     @DeleteMapping("/book")
-    ResultMap<Integer> clearBooks(@RequestParam String userUid);
+    ResultMap<Integer> clearBooks(@RequestParam("userUid") String userUid);
 
     @DeleteMapping("/books")
     ResultMap<Integer> deleteBookBatch(@RequestBody List<String> ids);
 
     @PostMapping(value = "/book/cover/{uid}")
-    ResultMap<Void> changeCover(@PathVariable String uid, @RequestParam String coverName);
+    ResultMap<Void> changeCover(@PathVariable("uid") String uid, @RequestParam("coverName") String coverName);
 
     @PutMapping("/book/update")
     ResultMap<Void> updateBookInfo(@RequestBody Book book);

@@ -187,8 +187,8 @@ public class LogAspect {
         ResultMap<?> res = null;
         try {
             if (ret instanceof ResultMap){
-                res = (ResultMap<?>) ret;
-                if (!logger.excludeResponseData()){
+                res = ((ResultMap<?>) ret).clone();
+                if (logger.excludeResponseData()){
                     res.setData(null);
                 }
                 logObj.setSuccess(res.isSuccessful());
@@ -199,8 +199,11 @@ public class LogAspect {
             e.printStackTrace();
             logObj.setException(e.getMessage())
                     .setSuccess(true);
+        } catch (CloneNotSupportedException e) {
+            log.error("响应对象克隆失败", e);
         }
         if (hasBean){
+            log.debug("log对象数据: " + logObj);
             managerService = applicationContext.getBean(ManagerService.class);
             managerService.addLog(logObj);
         }
