@@ -6,9 +6,7 @@
   <div v-else>
     <el-dropdown @command="handleCommand">
       <div class="logged">
-        <el-avatar :size="40"
-                   v-if="avatar"
-                   :src="avatar ? `data:image/jpg;base64,${avatar}` : '/images/anonymous.png'" />
+        <el-avatar :size="40" :src="avatar ? `data:image/jpg;base64,${avatar}` : '/images/anonymous.png'" />
         <span>{{ displayName }}</span>
       </div>
       <el-dropdown-menu slot="dropdown" class="user-menu">
@@ -34,7 +32,7 @@
     data(){
       return {
         reloadCount: 0,
-        adminSrc: "http://admin.kyu92.top/login"
+        adminSrc: "https://admin.kyu92.top/login"
       }
     },
     methods: {

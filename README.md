@@ -156,6 +156,59 @@ java -jar sentinel-dashboard-1.8.1.jar
 ***
 * ## 后端
 详见各个后端项目压缩包中的README.md
+#### 外置组件Docker运行命令
+* nacos:
+```shell
+docker run -p 8848:8848 \ 
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\nacos\conf:/home/nacos/conf \  
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\nacos\logs \  
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\nacos\access:/home/nacos/bin/logs \  
+-e MODE="standalone" \  
+--name gabriel-nacos-8848 \  
+nacos/nacos-server
+```
+* nginx:
+```shell
+docker run -p 80:80 -p 443:443 -p 81:81 \  
+--privileged=true \  
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\nginx\conf:/etc/nginx \  
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\nginx\html:/usr/share/nginx/html \  
+--link gabriel-nacos-8848 \  
+--name gabriel-nginx \  
+nginx
+```
+* minio:
+```shell
+docker run -p 9000:9000 \  
+--name gabriel-minio \  
+-d --restart=always \  
+-e "MINIO_ACCESS_KEY=minio" \  
+-e "MINIO_SECRET_KEY=kyu92.top" \  
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\minio:/data \  
+-v D:\IDEAWorkSpaces\gabriel-cloud\docker\minio\config:/root/.minio \  
+minio/minio server /data
+```
+* seata:  
+  > Seata组件有进行一定的封装，所以需要先构建镜像或者从镜像仓库下拉
+    * 构建镜像: `docker build -t gabriel/seata .`
+    * 运行容器: 
+      > ```shell
+      > docker run --name gabriel-seata \  
+      > -p 8091:8091 -e PORT=8091 \  
+      > -v D:\IDEAWorkSpaces\gabriel-cloud\docker\seata\conf:/seata/conf \  
+      > --link gabriel-nginx \  
+      > gabriel/seata
+      > ```
+
+* sentinel:
+  > Sentinel没有使用DockerHub上现成的镜像，需要自己构建或者从私有仓库下拉
+    * 构建镜像: `docker build -t gabriel/sentinel .`
+    * 运行容器: 
+    > ```shell
+    > docker run -p 8080:8080 \  
+    > --name gabriel-sentinel \  
+    > gabriel/sentinel
+    > ```
 
 * ## 数据库
 

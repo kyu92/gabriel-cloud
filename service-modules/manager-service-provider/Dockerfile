@@ -14,6 +14,7 @@ WORKDIR /manager-service-provider
 VOLUME /manager-service-provider
 
 COPY *.jar /manager-service-provider
+COPY boot.* /manager-service-provider
 COPY *.yml /manager-service-provider/config
 COPY *.properties /manager-service-provider/config
 

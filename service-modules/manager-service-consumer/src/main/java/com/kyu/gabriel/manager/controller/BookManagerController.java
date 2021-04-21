@@ -103,7 +103,12 @@ public class BookManagerController {
     @RequestMapping("/cover")
     @Authentication(0)
     public void showBookCover(String ownerUid, String coverName, HttpServletResponse response){
-        InputStream is = minioUtil.download(ownerUid, coverName);
+        InputStream is = null;
+        try {
+            is = minioUtil.download(ownerUid, coverName);
+        } catch (IOException | InvalidKeyException | InvalidResponseException | InsufficientDataException | NoSuchAlgorithmException | ServerException | InternalException | XmlParserException | ErrorResponseException e) {
+            e.printStackTrace();
+        }
         OutputStream os = null;
         try {
             os = response.getOutputStream();
@@ -187,7 +192,13 @@ public class BookManagerController {
         if (book == null){
             return ResultMap.failed(3004, "未找到相关记录");
         }
-        String url = minioUtil.download2URL(book.getUserUid(), book.getUuid() + book.getSuffix(), Method.GET, 300);
-        return ResultMap.success(0, null, url);
+        String url = null;
+        try {
+            url = minioUtil.download2URL(book.getUserUid(), book.getUuid() + book.getSuffix(), Method.GET, 300);
+            return ResultMap.success(0, null, url);
+        } catch (IOException | InvalidKeyException | InvalidResponseException | InsufficientDataException | NoSuchAlgorithmException | ServerException | InternalException | XmlParserException | ErrorResponseException e) {
+            e.printStackTrace();
+            return ResultMap.failed(2003, e.getMessage());
+        }
     }
 }

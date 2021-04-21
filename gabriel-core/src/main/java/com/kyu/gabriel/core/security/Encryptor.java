@@ -93,6 +93,6 @@ public class Encryptor {
     }
 
     public static void main(String[] args) {
-        System.out.println(to32MD5("Hello World"));
+        System.out.println(to32MD5("c38dd61e-a422-4eb5-99c9-ce612cda9cc2@123456"));
     }
 }

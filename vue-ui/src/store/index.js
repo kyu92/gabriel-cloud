@@ -65,7 +65,7 @@ export default new Vuex.Store({
       jwt.init(token);
       if (!jwt.isExpired()){
         user.getDataByToken().then(res => {
-          if (res.data.successful){
+          if (res.data.successful || res.data.statusCode === 2003){
             let data = res.data.data;
             context.commit("setLoginState", {
               isLogin: true,

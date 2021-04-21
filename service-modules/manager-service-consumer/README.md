@@ -6,14 +6,25 @@
 
 > 1.以jar包方式运行：
 >
->   * 运行命令: java -jar manager-service-consumer-0.0.1.jar
+>   * 运行命令: `java -jar manager-service-consumer-0.0.1.jar`
 >   * 或者直接运行boot.sh(window下使用boot.cmd)
 >
 > 2.以docker容器方式运行
 >
-> * 构建镜像: docker build -t gabriel/manager-service-consumer .
+> * 构建镜像: `docker build -t gabriel/manager-service-consumer .`
 >
-> * 运行容器: docker run -p 8051:8051 -v D:\IDEAWorkSpaces\gabriel-cloud\docker\manager-service-consumer\config:/manager-service-consumer/config -v D:\IDEAWorkSpaces\gabriel-cloud\docker\manager-service-consumer\logs:/manager-service-consumer/logs --name gabriel-manager-service-consumer gabriel/manager-service-consumer
+> * 运行容器:
+> ```shell
+> docker run -d -p 8051:8051 \
+> -v D:\IDEAWorkSpaces\gabriel-cloud\docker\manager-service-consumer\config:/manager-service-consumer/config \
+> -v D:\IDEAWorkSpaces\gabriel-cloud\docker\manager-service-consumer\logs:/manager-service-consumer/logs \
+> --link gabriel-nginx \
+> --link gabriel-seata \
+> --link gabriel-sentinel \
+> --link gabriel-minio \
+> --name gabriel-manager-consumer \
+> gabriel/manager-consumer
+> ```
 >
 > *注：此处name可以自行选择是否需要该参数，-p为容器需要暴露的端口，默认配置文件为8051  
 > -v为容器数据卷，根目录为/manager-service-consumer，推荐映射配置文件目录即可  

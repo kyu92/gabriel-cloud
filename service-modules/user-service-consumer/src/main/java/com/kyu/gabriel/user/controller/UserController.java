@@ -65,10 +65,15 @@ public class UserController {
         if (StringUtils.isEmpty(user.getHeadPic())){
             result.put("avatar", null);
         } else {
-            GetObjectResponse is = minioUtil.download(user.getUuid(), user.getHeadPic());
-            byte []data = IOUtils.toByteArray(is);
-            String imgStr = encoder.encodeToString(data);
-            result.put("avatar", imgStr);
+            GetObjectResponse is = null;
+            try {
+                is = minioUtil.download(user.getUuid(), user.getHeadPic());
+                byte []data = IOUtils.toByteArray(is);
+                String imgStr = encoder.encodeToString(data);
+                result.put("avatar", imgStr);
+            } catch (InvalidKeyException | InvalidResponseException | InsufficientDataException | NoSuchAlgorithmException | ServerException | InternalException | XmlParserException | ErrorResponseException e) {
+                e.printStackTrace();
+            }
         }
         result.put("username", user.getUsername());
         result.put("registerDate", user.getRegisterDate());
@@ -222,12 +227,13 @@ public class UserController {
         if (StringUtils.isEmpty(user.getHeadPic())){
             return ResultMap.success();
         }
-        GetObjectResponse is = minioUtil.download(user.getUuid(), user.getHeadPic());
+        GetObjectResponse is = null;
         try {
+            is = minioUtil.download(user.getUuid(), user.getHeadPic());
             byte []data = IOUtils.toByteArray(is);
             String imgStr = encoder.encodeToString(data);
             return ResultMap.success(0, null, imgStr);
-        } catch (IOException e) {
+        } catch (IOException | XmlParserException | ServerException | NoSuchAlgorithmException | InsufficientDataException | InvalidKeyException | InvalidResponseException | ErrorResponseException | InternalException e) {
             e.printStackTrace();
         } finally {
             if (is != null){
@@ -248,13 +254,22 @@ public class UserController {
         if (user == null){
             return ResultMap.failed(1001, "用户不存在");
         }
-        InputStream is = minioUtil.download(uuid, user.getHeadPic());
+        InputStream is = null;
         try {
+            is = minioUtil.download(uuid, user.getHeadPic());
             byte []data = IOUtils.toByteArray(is);
             String imgStr = encoder.encodeToString(data);
             return ResultMap.success(0, null, imgStr);
-        } catch (IOException e) {
+        } catch (IOException | XmlParserException | ServerException | NoSuchAlgorithmException | InsufficientDataException | InvalidKeyException | InvalidResponseException | ErrorResponseException | InternalException e) {
             e.printStackTrace();
+        } finally {
+            if (is != null){
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return ResultMap.failed(2003, "IO异常");
     }

@@ -174,7 +174,7 @@ public class BookController {
             response.setHeader("Content-Disposition", "attachment;filename=" + (book.getName() + book.getSuffix()));
             os.flush();
             os.close();
-        } catch (IOException e) {
+        } catch (IOException | XmlParserException | ServerException | NoSuchAlgorithmException | InsufficientDataException | InvalidKeyException | InvalidResponseException | ErrorResponseException | InternalException e) {
             e.printStackTrace();
         }
     }
@@ -188,8 +188,14 @@ public class BookController {
         if (book == null || !book.getUserUid().equals(user.getUuid())){
             return ResultMap.failed(9004, "你无权请求该资源");
         }
-        String url = minioUtil.download2URL(book.getUserUid(), book.getUuid() + book.getSuffix(), Method.GET, 60);
-        return ResultMap.success(0, null, url);
+        String url = null;
+        try {
+            url = minioUtil.download2URL(book.getUserUid(), book.getUuid() + book.getSuffix(), Method.GET, 60);
+            return ResultMap.success(0, null, url);
+        } catch (IOException | InvalidKeyException | InvalidResponseException | InsufficientDataException | NoSuchAlgorithmException | ServerException | InternalException | XmlParserException | ErrorResponseException e) {
+            e.printStackTrace();
+            return ResultMap.failed(2003, e.getMessage());
+        }
     }
 
     @RequestMapping("/cover/{uid}")
@@ -207,7 +213,7 @@ public class BookController {
             response.setHeader("Content-Disposition", "attachment;filename=" + (book.getName() + ".jpg"));
             os.flush();
             os.close();
-        } catch (IOException e) {
+        } catch (IOException | XmlParserException | ServerException | NoSuchAlgorithmException | InsufficientDataException | InvalidKeyException | InvalidResponseException | ErrorResponseException | InternalException e) {
             e.printStackTrace();
         }
     }

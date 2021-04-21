@@ -102,31 +102,21 @@ public class MinioUtil {
         minioClient.putObject(args);
     }
 
-    public GetObjectResponse download(String bucketName, String fileName){
+    public GetObjectResponse download(String bucketName, String fileName) throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
         checkConfig();
-        try {
-            GetObjectArgs args = GetObjectArgs.builder().bucket(bucketName).object(fileName).build();
-            return minioClient.getObject(args);
-        } catch (InvalidKeyException | NoSuchAlgorithmException | ErrorResponseException | InvalidResponseException | ServerException | InsufficientDataException | XmlParserException | InternalException | IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        GetObjectArgs args = GetObjectArgs.builder().bucket(bucketName).object(fileName).build();
+        return minioClient.getObject(args);
     }
 
-    public String download2URL(String bucketName, String fileName, Method method, int expire){
+    public String download2URL(String bucketName, String fileName, Method method, int expire) throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
         checkConfig();
-        try {
-            GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
-                    .method(method)
-                    .expiry(expire, TimeUnit.SECONDS)
-                    .bucket(bucketName)
-                    .object(fileName)
-                    .build();
-            return minioClient.getPresignedObjectUrl(args);
-        } catch (InvalidKeyException | NoSuchAlgorithmException | ErrorResponseException | InvalidResponseException | ServerException | InsufficientDataException | XmlParserException | InternalException | IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
+                .method(method)
+                .expiry(expire, TimeUnit.SECONDS)
+                .bucket(bucketName)
+                .object(fileName)
+                .build();
+        return minioClient.getPresignedObjectUrl(args);
     }
 
     public void remove(String bucketName, String fileName) throws IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException {
