@@ -55,6 +55,7 @@ public class LogAspect {
         mapper = new ObjectMapper();
     }
 
+    @Deprecated
     private String getParams(HttpServletRequest request, Logger logger) throws JsonProcessingException {
         List<String> exclude = Arrays.stream(logger.exclude()).collect(Collectors.toList());
         String contentType = request.getContentType();
