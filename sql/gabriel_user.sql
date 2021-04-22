@@ -82,7 +82,7 @@ CREATE TABLE `user_data`  (
 -- ----------------------------
 -- Records of user_data
 -- ----------------------------
-INSERT INTO `user_data` VALUES ('c38dd61e-a422-4eb5-99c9-ce612cda9cc2', 'kyu92', '89c1ff772d3c77f63a26be8bc2d7bf7b', NULL, NULL, '2021-02-21 15:38:22', NULL, NULL, 0, 1, 1, 1, 1, NULL, NULL);
+INSERT INTO `user_data` VALUES ('c38dd61e-a422-4eb5-99c9-ce612cda9cc2', 'kyu92', '89C1FF772D3C77F63A26BE8BC2D7BF7B', NULL, NULL, '2021-02-21 15:38:22', NULL, NULL, 0, 1, 1, 1, 1, NULL, NULL);
 
 -- ----------------------------
 -- View structure for admin_view
