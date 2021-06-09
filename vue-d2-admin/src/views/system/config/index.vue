@@ -62,6 +62,37 @@
           </el-form-item>
         </el-row>
       </fieldset>
+      <fieldset>
+        <legend>系统设置</legend>
+        <el-row>
+          <el-form-item label="邮箱认证验证码有效期">
+            <el-col :span="8">
+              <el-input-number :min="60" v-model="configForm.system.captchaExpire" placeholder="验证码有效期(秒)"/> 秒
+            </el-col>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="忘记密码验证码有效期">
+            <el-col :span="8">
+              <el-input-number :min="60" v-model="configForm.system.forgetExpire" placeholder="验证码有效期(秒)"/> 秒
+            </el-col>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="邮件logo跳转链接">
+            <el-col :span="8">
+              <el-input type="text" v-model="configForm.system.captchaIndexUrl" placeholder="跳转链接"/>
+            </el-col>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="管理员登录链接">
+            <el-col :span="8">
+              <el-input type="text" v-model="configForm.system.adminLoginUrl" placeholder="登录链接"/>
+            </el-col>
+          </el-form-item>
+        </el-row>
+      </fieldset>
     </el-form>
     <div style="text-align: center">
       <el-button type="success" @click.prevent="save">提交</el-button>
@@ -90,6 +121,12 @@ export default {
         jwt: {
           expire: 60,
           secret: "",
+        },
+        system: {
+          captchaExpire: 300,
+          captchaIndexUrl: null,
+          forgetExpire: 900,
+          adminLoginUrl: null,
         }
       }
     }
@@ -106,6 +143,10 @@ export default {
         this.configForm.minio.secretKey = data.minioSecretKey;
         this.configForm.jwt.expire = parseInt(data.jwtExpire);
         this.configForm.jwt.secret = data.jwtSecret;
+        this.system.captchaExpire = data.captchaExpire;
+        this.system.captchaIndexUrl = data.captchaIndexUrl;
+        this.system.forgetExpire = data.forgetExpire;
+        this.system.adminLoginUrl = data.adminLoginUrl;
       }).catch(err => {
         this.$notify.error({
           title: "错误",

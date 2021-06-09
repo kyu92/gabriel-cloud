@@ -192,8 +192,9 @@ export default {
    * @param {Object} webService
    * @param {Object} minio
    * @param {Object} jwt
+   * @param {Object} system
    */
-  saveConfig({webService, minio, jwt}){
+  saveConfig({webService, minio, jwt, system}){
     let form = {}
     form["queryLocation"] = webService.use;
     form["webServiceKey"] = webService.key;
@@ -203,6 +204,10 @@ export default {
     form["minioSecretKey"] = minio.secretKey;
     form["jwtExpire"] = jwt.expire;
     form["jwtSecret"] = jwt.secret;
+    form["captchaExpire"] = system.captchaExpire;
+    form["captchaIndexUrl"] = system.captchaIndexUrl;
+    form["forgetExpire"] = system.forgetExpire;
+    form["adminLoginUrl"] = system.adminLoginUrl;
     return service.post("/config/save", form, {headers: {"Content-Type": "application/json;charset=UTF-8"}});
   },
   /**

@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>gabriel验证码</title>
+    <style>
+        .wrapper{
+            border: 1px solid rgba(120, 120, 120, 0.6);
+                width: 50%;
+                margin: 0 auto;
+            }
+        @media screen and (max-width: 768px) {
+            .wrapper{
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-$END$
+<div class="wrapper">
+        <div style="border-bottom: 1px solid rgba(120, 120, 120, 0.6); padding: 10px 0 10px 30px">
+            <a href="{{indexUrl}}" style="font-size: 40px;color: #409eff;text-decoration: none">Gabriel</a>
+        </div>
+    <div>
+            <div style="margin: 30px; font-size: 14px">
+                <span>您的邮箱地址为:</span>
+                <a href="mailto:{{email}}">{{email}}</a>,
+                <span>验证码为: </span><br />
+                <div style="margin: 30px 0; color: #409eff; font-size: 35px">
+                    {{captcha}}
+                </div>
+            <span>验证码有效期为{{expire}}{{unit}}，请在有效期内输入!</span>
+        </div>
+        <div style="width: 95%; margin: 0 auto; height: 50px; border-top: 1px dashed rgba(180, 180, 180, 0.6); display: flex; align-items: center">
+            <span style="font-size: 12px; color: gray">本邮件为系统邮件，请勿回复。</span>
+        </div>
+    </div>
+</div>
 </body>
 </html>

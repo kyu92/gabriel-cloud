@@ -188,7 +188,7 @@ public class BookController {
         if (book == null || !book.getUserUid().equals(user.getUuid())){
             return ResultMap.failed(9004, "你无权请求该资源");
         }
-        String url = null;
+        String url;
         try {
             url = minioUtil.download2URL(book.getUserUid(), book.getUuid() + book.getSuffix(), Method.GET, 60);
             return ResultMap.success(0, null, url);

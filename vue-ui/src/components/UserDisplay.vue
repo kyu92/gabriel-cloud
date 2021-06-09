@@ -32,7 +32,7 @@
     data(){
       return {
         reloadCount: 0,
-        adminSrc: "https://admin.kyu92.top/login"
+        adminSrc: "http://admin.kyu92.top/login"
       }
     },
     methods: {
@@ -72,7 +72,7 @@
                   target: "logout",
                 }
                 window.frames[0].postMessage(data, "*");
-                let finishLogout = e =>{
+                let finishLogout = e => {
                   if (e.data.target === "logoutFinish" && e.origin.indexOf("kyu92.top") > 0){
                     this.$store.commit("setLoginState", {
                       isLogin: false,
@@ -114,6 +114,16 @@
       adminManager(){
         let permission = this.$store.state.userMenu.find(value => value.command === "manager").permission;
         return permission >= this.$store.state.userData.permission;
+      },
+      adminLoginUrl(){
+        return this.$store.state.systemInfo.adminLoginUrl;
+      }
+    },
+    watch: {
+      adminLoginUrl(val){
+        if (val != null){
+          this.adminSrc = val;
+        }
       }
     },
     created(){

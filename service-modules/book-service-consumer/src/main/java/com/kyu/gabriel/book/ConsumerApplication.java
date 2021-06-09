@@ -1,5 +1,6 @@
 package com.kyu.gabriel.book;
 
+import com.alibaba.csp.sentinel.init.InitExecutor;
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

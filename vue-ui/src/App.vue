@@ -11,6 +11,7 @@ export default {
       }
     },
     created() {
+      this.$store.dispatch("getSystemInfo");
       this.$store.dispatch("getData");
       // this.showHitokoto();
       // console.log(document.domain)

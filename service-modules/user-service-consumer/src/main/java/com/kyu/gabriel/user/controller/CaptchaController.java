@@ -37,8 +37,6 @@ public class CaptchaController {
     private final MailUtil mailUtil;
     private final RedisUtil redisUtil;
     private final UserService userService;
-    private final String indexUrl = "http://example.kyu92.top";
-    private final int expire = 300;
     private final ConfigMap configMap;
     private final Encryptor encryptor;
 
@@ -73,13 +71,14 @@ public class CaptchaController {
     @Authentication
     @PostMapping("/captcha")
     public ResultMap<Void> sendEmailCaptcha(HttpServletRequest request){
+        int expire = Integer.parseInt(configMap.get("captchaExpire"));
         User user = (User) request.getAttribute("user");
         String captcha = StringGenerator.randomOnlyNumber(6);
         redisUtil.setEx("captcha:" + user.getEmail(), captcha, expire);
         MailBean bean = new MailBean()
                 .setSubject("[Gabriel 阅读器]: 邮箱验证码")
                 .setToAccount(user.getEmail())
-                .setContent(StringGenerator.makeEmailCaptcha(user.getEmail(), indexUrl, captcha, expire));
+                .setContent(StringGenerator.makeEmailCaptcha(user.getEmail(), configMap.get("captchaIndexUrl"), captcha, expire));
         if(mailUtil.sendMailAttachment(bean)) {
             return ResultMap.success();
         } else {
@@ -104,6 +103,7 @@ public class CaptchaController {
 
     @RequestMapping("/forget")
     public ResultMap<Map<String, Object>> forgetPassword(String uniqueData){
+        int expire = Integer.parseInt(configMap.get("forgetExpire"));
         User user = userService.queryByUniqueColumns(uniqueData).getData();
         if (user == null){
             return ResultMap.failed(1001, "用户不存在");
@@ -113,7 +113,7 @@ public class CaptchaController {
         MailBean bean = new MailBean()
                 .setSubject("[Gabriel 阅读器]: 找回密码")
                 .setToAccount(user.getEmail())
-                .setContent(StringGenerator.makeEmailCaptcha(user.getEmail(), indexUrl, verifyCode, expire));
+                .setContent(StringGenerator.makeEmailCaptcha(user.getEmail(), configMap.get("captchaIndexUrl"), verifyCode, expire));
         if(mailUtil.sendMailAttachment(bean)){
             Map<String, Object> result = new HashMap<>();
             result.put("uuid", user.getUuid());

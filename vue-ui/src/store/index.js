@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import utils from "@/common/utils";
 import jwt from "@/common/jwt";
 import user from "@/api/user";
+import manager from "@/api/manager";
 
 Vue.use(Vuex)
 
@@ -31,7 +32,10 @@ export default new Vuex.Store({
       {label: '关于', name: 'about', path: '#about'},
       {label: '展示', name: 'display', path: '#display'},
       {label: '答疑', name: 'question', path: '/question'},
-    ]
+    ],
+    systemInfo: {
+      adminLoginUrl: null,
+    }
   },
   mutations: {
     sortUserMenu({userMenu}){
@@ -57,6 +61,9 @@ export default new Vuex.Store({
     },
     setHitokoto({userData}, value){
       userData.hitokoto = value;
+    },
+    setSystemInfo({systemInfo}, data){
+      systemInfo.adminLoginUrl = data.adminLoginUrl;
     }
   },
   actions: {
@@ -84,6 +91,13 @@ export default new Vuex.Store({
           }
         });
       }
+    },
+    getSystemInfo({commit}){
+      manager.getSystemInfo().then(({data: res}) => {
+        commit("setSystemInfo", res.data);
+      }).catch(err => {
+        console.error(err);
+      });
     }
   },
   modules: {

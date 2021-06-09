@@ -1,5 +1,8 @@
 package com.kyu.gabriel.core.string;
 
+import org.springframework.core.io.ClassPathResource;
+
+import java.io.*;
 import java.text.MessageFormat;
 import java.util.Random;
 
@@ -62,6 +65,24 @@ public abstract class StringGenerator {
         } else if (expire > 120){
             unit = "分钟";
             expire = expire / 60;
+        }
+        try {
+            InputStream is = new ClassPathResource("template.html").getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String data = null;
+            while((data = br.readLine()) != null){
+                sb.append(data);
+            }
+            return sb.toString()
+                    .replace("{{indexUrl}}", indexUrl)
+                    .replaceAll("\\{\\{email}}", email)
+                    .replace("{{captcha}}", captcha)
+                    .replace("{{expire}}", String.valueOf(expire))
+                    .replace("{{unit}}", unit);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return String.format("<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +

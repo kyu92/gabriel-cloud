@@ -125,4 +125,11 @@ public class SystemController {
         configMap.save(user);
         return ResultMap.success();
     }
+
+    @RequestMapping("/system/info")
+    public ResultMap<Map<String, String>> getSystemInfo(){
+        Map<String, String> info = new HashMap<>();
+        info.put("adminLoginUrl", configMap.get("adminLoginUrl"));
+        return ResultMap.success(info);
+    }
 }

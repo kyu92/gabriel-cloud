@@ -21,4 +21,7 @@ export default {
         }
         return service.post("/quest/other/put", form);
     },
+    getSystemInfo() {
+        return service("/system/info");
+    }
 }

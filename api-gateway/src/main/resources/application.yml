@@ -6,7 +6,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: http://nacos.kyu92.top:81
+        server-addr: http://localhost:81
         heart-beat-interval: 15
         heart-beat-timeout: 60
         register-enabled: false
