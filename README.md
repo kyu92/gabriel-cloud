@@ -18,7 +18,6 @@ Gabriel是基于Vue+SpringCloud Alibaba设计的支持**多种**电子书格式�
 ![书架](./images/书架.jpg)
 ![阅读页面](./images/阅读页面.jpg)
 ![控制台首页](./images/控制台首页.jpg)
-![控制台系统日志](./images/控制台系统日志.jpg)
 
 
 ## 部署相关
